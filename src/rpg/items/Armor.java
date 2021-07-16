@@ -66,13 +66,14 @@ public class Armor extends Items{
         }
     }
 
-    public void setArmor(Slot slot, ArmorType armorType, Hero hero){
-
+    public boolean setArmor(Slot slot, ArmorType armorType, Hero hero){
+        boolean check = false;
         if((hero instanceof Mage) && (armorType == ArmorType.CLOTH)){
 
             armorHashMap.put(slot, armorType);
             setBonusAttribute(slot, 3);
             calculateTotalPrimaryAttributes(hero);
+            check = true;
         }else if((hero instanceof Mage) && (armorType != ArmorType.CLOTH)){
             throw new InvalidArmorException("Armor cannot be equipped");
         }
@@ -84,10 +85,12 @@ public class Armor extends Items{
                 if(armorType==ArmorType.LEATHER){
                     setBonusAttribute(slot, 3);
                     calculateTotalPrimaryAttributes(hero);
+                    check = true;
                 }
                 if(armorType==ArmorType.MAIL){
                     setBonusAttribute(slot, 5);
                     calculateTotalPrimaryAttributes(hero);
+                    check = true;
                 }
                 System.out.println(armorHashMap.toString() + "<--- works?");
             }
@@ -103,10 +106,12 @@ public class Armor extends Items{
                 if(armorType==ArmorType.LEATHER){
                     setBonusAttribute(slot, 3);
                     calculateTotalPrimaryAttributes(hero);
+                    check = true;
                 }
                 if(armorType==ArmorType.MAIL){
                     setBonusAttribute(slot, 5);
                     calculateTotalPrimaryAttributes(hero);
+                    check = true;
                 }
             }else{
                 }
@@ -120,15 +125,18 @@ public class Armor extends Items{
             if(armorType==ArmorType.PLATE){
                 setBonusAttribute(slot, 5);
                 calculateTotalPrimaryAttributes(hero);
+                check = true;
             }
             if(armorType==ArmorType.MAIL){
                 setBonusAttribute(slot, 3);
                 calculateTotalPrimaryAttributes(hero);
+                check = true;
             }
         }
         }else if((hero instanceof Warrior) && ((armorType != ArmorType.MAIL) || (armorType != ArmorType.PLATE))){
                 throw new InvalidArmorException("Armor cannot be equipped");
             }
+        return check;
     }
 
     public boolean checkIfArmorCanBeEquipped(Hero hero, ArmorType armorType, int level){

@@ -140,7 +140,11 @@ public class Ranger extends Hero{
 
     @Override
     public void setHeroDPS(int allTotalAttributesTogether) {
-        heroDPS = weapons.getWeaponDPS()  * (1 + allTotalAttributesTogether/100);
+        int weaponDPS = 1;
+        if(weapons != null){
+            weaponDPS = weapons.getWeaponDPS();
+        }
+        heroDPS = weaponDPS * (1 + allTotalAttributesTogether/100);
     }
 
     @Override
